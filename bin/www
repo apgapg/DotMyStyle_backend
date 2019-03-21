@@ -20,7 +20,7 @@ const server = http.createServer(app);
 
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://faworkflow:ED9rheM79bBRCO4T2VilQbFyKYW2G7kSKluJCJmdsX8ctZTMVMvqkUCUEzq7ACIxIr7w7w66nzevLqCPUFdwfw%3D%3D@faworkflow.documents.azure.com:10255/logs?ssl=true');
+mongoose.connect('mongodb://heroku_56vk0xkl:up9jo19chd7bfjidl3uh2qle0u@ds255262.mlab.com:55262/heroku_56vk0xkl', {useNewUrlParser: true});
 const db = mongoose.connection;
 db.on('error', function () {
     debug('MongoDB connection error:');
