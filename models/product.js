@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const Feed = mongoose.model('feeds', Schema(),);
+const Product = mongoose.model('products', Schema(),);
 
-module.exports = Feed;
+module.exports = Product;
