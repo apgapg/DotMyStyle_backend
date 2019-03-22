@@ -12,6 +12,7 @@ const promotionRouter = require('./routes/promotion');
 const salonRouter = require('./routes/salon');
 const feedRouter = require('./routes/feed');
 const productRouter = require('./routes/product');
+const categoryRouter = require('./routes/category');
 const jwt = require("jsonwebtoken");
 const bearerToken = require('express-bearer-token');
 
@@ -48,6 +49,7 @@ app.use('/api/v1/dot/promotions', promotionRouter);
 app.use('/api/v1/dot/salons', salonRouter);
 app.use('/api/v1/dot/feeds', feedRouter);
 app.use('/api/v1/dot/products', productRouter);
+app.use('/api/v1/dot/categories', categoryRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
