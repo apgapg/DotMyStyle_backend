@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
+const otpRouter = require('./routes/login/otp');
 const stylistRouter = require('./routes/stylist');
 const inspirationRouter = require('./routes/inspiration');
 const promotionRouter = require('./routes/promotion');
@@ -29,16 +30,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bearerToken());
 
 app.use('/', indexRouter);
+app.use('/api/v1/login/otp', otpRouter);
 app.use('/api/v1/dot/*', function (req, res, next) {
     jwt.verify(req.token, process.env.SECRET, function (err, decoded) {
         if (err) {
             console.log(err);
             next(createError(401));
         } else {
+            console.log(decoded);
             next();
         }
-        // err
-        // decoded undefined
     });
 });
 app.use('/api/v1/dot/stylist', stylistRouter);
