@@ -20,7 +20,7 @@ const server = http.createServer(app);
 
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://heroku_56vk0xkl:up9jo19chd7bfjidl3uh2qle0u@ds255262.mlab.com:55262/heroku_56vk0xkl', {useNewUrlParser: true});
+mongoose.connect(process.env.MONGODB, {useNewUrlParser: true});
 const db = mongoose.connection;
 db.on('error', function () {
     debug('MongoDB connection error:');

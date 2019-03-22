@@ -4,7 +4,7 @@ const router = express.Router();
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
-    Salon.find({})
+    Salon.find({}, {_id: 0, categories: 0, dummy: 0, location: 0})
         .sort({
             updatedAt: -1
         })
