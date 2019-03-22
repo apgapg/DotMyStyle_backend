@@ -4,6 +4,7 @@ const SendOtp = require('sendotp');
 const User = require('../../models/user');
 const sendOtp = new SendOtp('116701AeExtkERH57653697');
 const axios = require("axios");
+const jwt = require("jsonwebtoken");
 
 router.post('/sendotp', function (req, res, next) {
     const number = req.body.number;
@@ -59,7 +60,16 @@ router.post('/verifyotp', function (req, res, next) {
                         next(err);
                     } else {
                         console.log(user);
-                        res.send("Login successful");
+                        const payload = {
+                            jti: user._id,
+                            iss: "https:\/\/dotmystyle.com",
+                        };
+                        jwt.sign(payload, process.env.SECRET, {}, function (err, token) {
+                            if (err)
+                                res.sendStatus(500);
+                            else
+                                res.send({token: token,});
+                        });
                     }
                 });
 
@@ -69,16 +79,6 @@ router.post('/verifyotp', function (req, res, next) {
                 console.log(error);
                 res.sendStatus(400);
             });
-        /* sendOtp.send(number, "DOTMYSTYLE", function (error, data) {
-             if (error) {
-                 console.log(error);
-                 error.status(500);
-                 next(error);
-             } else {
-                 console.log(data);
-                 res.send("OTP send successfully");
-             }
-         });*/
     } else {
         res.sendStatus(400);
     }
